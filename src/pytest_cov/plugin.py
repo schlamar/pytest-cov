@@ -104,9 +104,9 @@ def pytest_addoption(parser):
                          'annotate, html, xml and lcov may be followed by ":DEST" '
                          'where DEST specifies the output location. '
                          'Use --cov-report= to not generate any output.')
-    group.addoption('--cov-config', action='store', default='.coveragerc',
+    group.addoption('--cov-config', action='store', default='',
                     metavar='PATH',
-                    help='Config file for coverage. Default: .coveragerc')
+                    help='Config file for coverage.')
     group.addoption('--no-cov-on-fail', action='store_true', default=False,
                     help='Do not report coverage if test run fails. '
                          'Default: False')
