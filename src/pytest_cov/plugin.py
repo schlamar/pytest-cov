@@ -11,6 +11,11 @@ import pytest
 from coverage.results import display_covered
 from coverage.results import should_fail_under
 
+try:
+    from pytest import TerminalReporter  # noqa: PT013
+except ImportError:
+    from _pytest.terminal import TerminalReporter
+
 from . import CovDisabledWarning
 from . import CovFailUnderWarning
 from . import CovReportWarning
@@ -333,6 +338,8 @@ class CovPlugin:
             # it for unit tests that don't need it
             from coverage.misc import CoverageException
 
+            tr = TerminalReporter(session.config, self.cov_report)
+            tr.write_sep('=', 'coverage report')
             try:
                 self.cov_total = self.cov_controller.summary(self.cov_report)
             except CoverageException as exc:
